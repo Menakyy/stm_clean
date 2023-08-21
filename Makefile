@@ -11,6 +11,7 @@ check:
 	cmake --build build/ -j
 
 testing:
-	cmake -S . -B build -DTESTING=ON
+	cmake -S . -B build/ -DTESTING=ON
+	cmake --build build/ -j
 
 all: delete install prepare check

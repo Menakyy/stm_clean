@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 project("STM_PROJECT")
 
 option(TESTING "Building tests" OFF)
@@ -40,9 +41,18 @@ set(C_SRCS
     "Drivers/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal.c"
 )
 
+set(GLOBAL_DEFINES
+
+    # -DDEBUG
+    -DSTM32F303xE
+    -DUSE_HAL_DRIVER
+    -DSTM32F303xE
+)
+
 include_directories(${INCLUDE_DIRS})
 
-# add_executable(${CMAKE_PROJECT_NAME} ${CPP_SRCS} ${C_SRCS})
+add_executable(${CMAKE_PROJECT_NAME} ${CPP_SRCS} ${C_SRCS})
+
 if(TESTING)
     add_subdirectory("lib/cpputest")
     add_subdirectory("tests")
